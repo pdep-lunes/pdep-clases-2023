@@ -1,0 +1,34 @@
+import veterinaria.*
+import animales.*
+
+describe "Tests de Huellitas" {
+	
+	const pacientesParaTests = #{nano, pepita, kali}
+	
+	method cargarPacientes() {
+		pacientesParaTests.forEach({ paciente => huellitas.agregarPaciente(paciente) })
+	}
+
+	test "testHuellitasInicialmenteTiene0Pacientes" {
+
+		assert.equals(0, huellitas.cantidadDePacientes())
+
+	}
+	
+	test "testHuellitasTiene3PacientesSiAgergamosANanoYKaliYPepita" {
+		
+		self.cargarPacientes()
+		
+		assert.equals(3, huellitas.cantidadDePacientes())
+	}
+	
+	test "testHuellitasMeRetornaLosResponsablesDeLosPAcientes" {
+		
+		self.cargarPacientes()
+		
+		const responsables = #{nano.responsable(), pepita.responsable() , kali.responsable()}
+		 
+		assert.equals(responsables, huellitas.responsablesDePacientes().asSet())
+		
+	}
+}
