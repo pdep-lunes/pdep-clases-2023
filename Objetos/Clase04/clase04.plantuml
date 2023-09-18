@@ -1,0 +1,56 @@
+@startuml
+' ¡El diagrama tiene que ser conexo!
+class Estudiante {
+  notas
+  materiasQueCursa
+
+  promedio()
+  recibirNota(unaNota)
+  esEjemplar()
+  cantidadDeExamenesDesaprobados()
+  proximasMateriasACursar()
+}
+
+class Oyente {
+  promedio()
+  recibirNota(unaNota)
+  esEjemplar()
+}
+
+object ale {
+  cfd
+
+  --
+
+  cursantesEjemplares()
+  promedioDelCurso()
+  darNota()
+  notaDelExamen()
+  agregarCursante(unCursante)
+  darDeAltaNuevoEstudiante()
+}
+
+interface Cursante {
+  esEjemplar()
+  promedio()
+  recibirNota(unaNota)
+}
+
+ale -r-> "*" Cursante : cursantes "conoce/tiene"
+Estudiante .u.|> Cursante : implementa
+Oyente .u.|> Cursante
+
+object homero {
+  calorias
+
+  --
+
+  comer(unaComida)
+}
+
+class Comida {
+  calorias
+}
+
+homero ..> Comida : usa
+@enduml
