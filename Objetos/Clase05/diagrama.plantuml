@@ -1,0 +1,75 @@
+@startuml
+class Caballo {
+	comer(unosGramos)
+	galopar(unaDistancia)
+	estaFeliz()
+	recibirCuracion()
+  pasarElTiempo(unTiempo)
+}
+
+class Golondrina {
+	ciudad
+
+	comer(unosGramos)
+	volarHacia(unaCiudad)
+	estaFeliz()
+	recibirCuracion()
+  pasarElTiempo(unTiempo)
+}
+
+class Gato {
+	comer(unosGramos)
+	estaFeliz()
+	recibirCuracion()
+}
+
+abstract class Animal {
+  edad
+  energia
+  responsable
+
+  cumplirAnios()
+  dormir()
+  llamadoAResponsable()
+  responsableEnMayusculas()
+  {abstract} estaFeliz()
+  {abstract} recibirCuracion()
+  pasarElTiempo(unTiempo)
+}
+
+object huellitas {
+	botiquin
+	pacientes
+
+  --
+
+	botiquin()
+	pacientes()
+	agregar(unaLista, unElemento)
+	agregarAlBotiquin(unElemento)
+	agregarPaciente(unPaciente)
+	darAlta(unPaciente)
+	cantidadDePacientes()
+	pacientesRecuperados()
+	responsablesDePacientes()
+	seNecesitaComprarVendas()
+	pacienteConMasEnergia()
+	curar()
+}
+
+object pegaso {
+  ciudad
+
+  --
+
+  volarHacia(unaCiudad)
+  pasarElTiempo(unTiempo)
+  estaFeliz()
+}
+
+huellitas -r-> "*" Animal : pacientes
+Gato -u-|> Animal
+Caballo -u-|> Animal
+Golondrina -u-|> Animal : hereda de
+pegaso -u-|> Caballo
+@enduml
