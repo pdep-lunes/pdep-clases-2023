@@ -1,0 +1,7 @@
+import jerry.jerry
+import Rick.Rick
+import NoPuedoIrmeDeViajeException.NoPuedoIrmeDeViajeException
+
+test "jerry no puede irse de aventuras" {
+  assert.throwsExceptionWithType(new NoPuedoIrmeDeViajeException(), { jerry.irseDeViaje(new Rick(demencia = 10)) })
+}

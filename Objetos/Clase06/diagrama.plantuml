@@ -1,0 +1,38 @@
+@startuml
+class Rick {
+  demencia
+
+  irDeAventuraCon(unAcompaniante)
+  noAventurar()
+  aumentarDemencia(unaCantidad)
+  disminuirDemencia(unaCantidad)
+}
+
+class Morty implements Acompaniante {
+  saludMental
+
+  irseDeViaje(unRick)
+}
+
+class Beth implements Acompaniante {
+  afectoPaterno
+
+  irseDeViaje(unRick)
+}
+
+class Summer extends Beth {
+  irseDeViaje(unRick)
+  esLunes()
+}
+
+object jerry {
+  irseDeViaje(unRick)
+}
+
+interface Acompaniante {
+  irseDeViaje(unRick)
+}
+
+Rick .r.> Acompaniante
+jerry .u.|> Acompaniante
+@enduml
