@@ -1,0 +1,58 @@
+@startuml
+object gameflix {
+  juegos
+  clientes
+
+  --
+
+  juegosDeCategoria(unaCategoria)
+  juegoLlamado(unNombre)
+  juegoRecomendado()
+  cobrarSuscripciones()
+}
+
+class Usuario {
+  suscripcion
+
+  pagarSuscripcion()
+  jugar(unJuego)
+}
+
+interface Suscripcion {
+  precio()
+  permiteJugarA(unJuego)
+}
+
+object premium {
+  --
+  precio()
+  permiteJugarA(unJuego)
+}
+
+object base {
+  --
+  precio()
+  permiteJugarA(unJuego)
+}
+
+class SuscripcionCategorica {
+  precio
+  categoriaQueTePermiteJugar
+  permiteJugarA(unJuego)
+}
+
+
+class Juego {
+  esDeCategoria(unaCategoria)
+  seLlama(unNombre)
+  saleMenosDe(unPrecio)
+}
+
+gameflix --> "*" Usuario : clientes
+gameflix --> "*" Juego : juegos
+Usuario -r-> Suscripcion
+premium .u.|> Suscripcion
+base .u.|> Suscripcion
+SuscripcionCategorica .u.|> Suscripcion
+Suscripcion .r.> Juego
+@enduml
