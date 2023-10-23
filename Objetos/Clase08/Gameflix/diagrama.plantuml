@@ -1,0 +1,93 @@
+@startuml
+object gameflix {
+  juegos
+  clientes
+
+  --
+
+  juegosDeCategoria(unaCategoria)
+  juegoLlamado(unNombre)
+  juegoRecomendado()
+  cobrarSuscripciones()
+}
+
+rectangle Composicion #lightblue;line.dotted {
+  class Usuario {
+    suscripcion
+
+    pagarSuscripcion()
+    jugar(unJuego, unasHoras)
+  }
+
+  interface Suscripcion {
+    precio()
+    permiteJugarA(unJuego)
+  }
+
+  object premium {
+    --
+    precio()
+    permiteJugarA(unJuego)
+  }
+
+  object base {
+    --
+    precio()
+    permiteJugarA(unJuego)
+  }
+
+  class SuscripcionCategorica {
+    precio
+    categoriaQueTePermiteJugar
+    permiteJugarA(unJuego)
+  }
+}
+
+rectangle Herencia #lightgreen;line.dotted {
+  abstract class Juego {
+    categoria
+
+    esDeCategoria(unaCategoria)
+    seLlama(unNombre)
+    saleMenosDe(unPrecio)
+    {abstract} jugar(unUsuario, unasHoras)
+  }
+
+  class JuegoDeTerror extends Juego {
+    jugar(unUsuario, unasHoras)
+  }
+
+  class Moba extends Juego {
+    jugar(unUsuario, unasHoras)
+  }
+
+  class JuegoEstrategico extends Juego {
+    jugar(unUsuario, unasHoras)
+  }
+
+  class JuegoViolento extends Juego {
+    jugar(unUsuario, unasHoras)
+  }
+}
+
+gameflix --> "*" Usuario : clientes
+gameflix --> "*" Juego : juegos
+Usuario -r-> Suscripcion
+premium .u.|> Suscripcion
+base .u.|> Suscripcion
+SuscripcionCategorica .u.|> Suscripcion
+Suscripcion .r.> Juego
+@enduml
+
+
+' Herencia
+' - estática -> No puede cambiar a lo largo del tiempo
+' - Te permite implementar un sólo tipo
+' +++ simple
+
+' vs.
+
+' Composición
+' + dinámica -> Puede cambiar a lo largo del tiempo
+' + Te permite implementar múltiples tipos
+' --- complicada
